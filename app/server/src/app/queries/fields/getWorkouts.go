@@ -1,4 +1,3 @@
-// resolver for getting the list of workouts from DB
 package queries
 
 import (
@@ -23,7 +22,6 @@ var GetWorkouts = &graphql.Field {
 	Description: "Get all workouts",
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		// gets all rows from workouts table
 		rows, err := postgres.Client.Query("SELECT id, title, target FROM workouts")
 		if err != nil {
 			panic(err)
@@ -48,7 +46,6 @@ var GetWorkouts = &graphql.Field {
 			}
 		}
 
-		// get any error encountered during iteration
 		err = rows.Err()
 		if err != nil {
 			panic(err)

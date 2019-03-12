@@ -2,8 +2,6 @@ import React from 'react'
 import './routines.css'
 
 const Routines = ({ routines, idx }) => {
-	console.log("idx: ", idx);
-	// try an array of indicators first.
 	let arrOfIndicators = [];
 	let i = 0;
 	while (i < routines.length) {

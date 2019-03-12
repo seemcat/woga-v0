@@ -7,11 +7,9 @@ import AppRouter from "./routes";
 const client = new ApolloClient({
 	uri: 'http://localhost:3000/graphql',
 	clientState: {
-		// initial states of local data
 		defaults: {
 			isDisplayingWorkoutForm: false,
 		}, 
-		// functions to get or update local data
 		resolvers: {
 			Mutation: {
 				updateWorkoutFormToggleValue: (_, { isDisplayingWorkoutForm }, { cache }) => {

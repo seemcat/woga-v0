@@ -2,3 +2,8 @@ node_modules/
 *.mp4
 app/server/pkg/dep/sources/
 app/server/src/app/vendor/
+app/client/package-lock.json
+*.DS_Store
+app/client/src/balance.json
+app/server/src/app/Gopkg.lock
+app/server/src/app/Gopkg.toml

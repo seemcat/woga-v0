@@ -10,7 +10,6 @@ import './workout.css'
 import Routines from '../../components/Routines'
 
 const Workout = () => (
-	// QUERY COMPONENT TO GET WORKOUTS
 	<Query query={GET_WORKOUTS}>
 	{({ loading, error, data }) => {
 		if (loading) return 'Loding...';
@@ -18,7 +17,6 @@ const Workout = () => (
 		let workoutData = data;
 
 		return (
-			// QUERY COMPONENT TO GET ROUTINES
 			<Query query={GET_ROUTINES}>
 			{({ loading, error, data }) => {
 				if (loading) return 'Loding...';

@@ -27,11 +27,9 @@ var AddWorkout = &graphql.Field {
 
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		// get our params
 		title, _ := params.Args["title"].(string)
 		target, _ := params.Args["target"].(string)
 
-		// add a new workouts row
 		sqlStatement := `
 		INSERT INTO workouts (title, target)
 		VALUES ($1, $2)

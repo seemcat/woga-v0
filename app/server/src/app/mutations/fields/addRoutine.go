@@ -35,13 +35,11 @@ var AddRoutine = &graphql.Field {
 
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		// get our params
 		workout_id, _ := params.Args["workout_id"].(int)
 		title, _ := params.Args["title"].(string)
 		reps, _ := params.Args["reps"].(int)
 		giffUrl, _ := params.Args["giffUrl"].(string)
 
-		// add a new workouts row
 		sqlStatement := `
 		INSERT INTO routines (workout_id, title, reps, giffUrl)
 		VALUES ($1, $2, $3, $4)

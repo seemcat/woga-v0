@@ -1,4 +1,3 @@
-// resolver for getting the list of routines from DB
 package queries
 
 import (
@@ -31,7 +30,6 @@ var GetRoutines = &graphql.Field {
 	Description: "Get all routines",
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		// gets all rows from routines  table
 		rows, err := postgres.Client.Query("SELECT id, workout_id, title, reps, giffUrl FROM routines")
 		if err != nil {
 			panic(err)
@@ -58,7 +56,6 @@ var GetRoutines = &graphql.Field {
 			}
 		}
 
-		// get any error encountered during iteration
 		err = rows.Err()
 		if err != nil {
 			panic(err)
