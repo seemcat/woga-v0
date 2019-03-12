@@ -1,0 +1,4 @@
+node_modules/
+*.mp4
+app/server/pkg/dep/sources/
+app/server/src/app/vendor/
