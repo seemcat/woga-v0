@@ -1,0 +1,44 @@
+.nb-section {
+	display: flex;
+	font-family: 'Roboto', sans-serif;
+	padding-left: 30px;
+	padding-right: 50px;
+	padding-top: 30px;
+}
+
+.nb-section > div {
+	padding: 10px;
+	position: relative;
+	z-index: 1;
+}
+
+.nb-logo {
+	margin-right: auto;
+}
+
+.nb-text {
+	display: inline-block;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.nb-about {
+	margin-right: 20px
+}
+
+.nb-text:after {
+	display: block;
+	content: '';
+	border-bottom: solid 2px #000;
+	transform: scaleX(0);
+	transition: transform 250ms ease-in-out;
+	transform-origin: 0% 50%;
+}
+
+.nb-text:hover {
+	cursor: pointer;
+}
+
+.nb-text:hover:after {
+	transform: scaleX(1);
+}

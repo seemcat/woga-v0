@@ -1,0 +1,53 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	scroll-behavior: smooth;
+	font-family: 'GFS Didot', serif;
+}
+
+.woga-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.woga-title {
+	flex: 1;
+	flex-direction: column;
+	font-size: 3em;
+	padding: 5px;
+	margin: 10px;
+}
+
+.woga-subtitle {
+	font-size: 1em;
+}
+
+.woga-card-title {
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 1em;
+}
+
+.woga-item {
+	display: flex;
+	justify-content: center;
+	margin: 10px;
+}
+
+.woga-section {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.woga-card {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 50%;
+	margin: 10px;
+	padding: 5px;
+}
+
