@@ -10,5 +10,6 @@ var RootQuery = graphql.NewObject(graphql.ObjectConfig{
 	Fields: graphql.Fields{
 		"getWorkouts": fields.GetWorkouts,
 		"getRoutines": fields.GetRoutines,
+		"getMeditations": fields.GetMeditations,
 	},
 })

@@ -27,3 +27,14 @@ export const GET_WORKOUTS = gql`
 			  }
 	    }
 `
+
+export const GET_MEDITATIONS = gql`
+  query GetMeditations{
+	      getMeditations {
+			    id
+			    title
+			    keywords
+			    mp3
+			  }
+	    }
+`
