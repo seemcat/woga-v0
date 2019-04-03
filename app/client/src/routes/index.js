@@ -7,6 +7,7 @@ import About from './about'
 import Workout from './workout'
 import WorkoutForm from './workoutForm'
 import Meditation from './meditation'
+import MeditationForm from './meditationForm'
 import Woga from './woga'
 import Resources from './resources'
 
@@ -20,8 +21,9 @@ class AppRouter extends React.Component {
 			<Route exact path='/' component={Home} />
 			<Route exact path='/about' component={About} />
 			<Route exact path='/workout' component={Workout} />
-			<Route exact path='/workoutForm' component={WorkoutForm} />
+			<Route exact path='/workoutform' component={WorkoutForm} />
 			<Route exact path='/meditation' component={Meditation} />
+			<Route exact path='/meditationform' component={MeditationForm} />
 			<Route exact path='/woga' component={Woga} />
 			<Route exact path='/resources' component={Resources} />
 			<Route exact component={NotFound} />

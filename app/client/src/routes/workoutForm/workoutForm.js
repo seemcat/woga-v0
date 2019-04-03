@@ -1,5 +1,4 @@
 import React from 'react'
-import './workoutForm.css'
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { graphql, compose, Mutation } from 'react-apollo';

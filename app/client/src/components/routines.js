@@ -1,5 +1,4 @@
 import React from 'react'
-import './routines.css'
 
 const Routines = ({ routines, idx }) => {
 	let arrOfIndicators = [];

@@ -1,5 +1,4 @@
 import React from 'react'
-import Info from '../../components/Info'
 import Card from '../../components/Card'
 import './home.css'
 import Lottie from 'react-lottie'

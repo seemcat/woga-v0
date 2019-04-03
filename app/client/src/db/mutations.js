@@ -26,3 +26,13 @@ export const ADD_ROUTINE = gql`
 			  }
 	    }
 `
+
+export const ADD_MEDITATION = gql`
+  mutation AddMeditation($title: String, $keywords: [String], $mp3: String) {
+	      addMeditation(title: $title, keywords: $keywords, mp3: $mp3) {
+			    title
+			    keywords
+			    mp3
+			  }
+	    }
+`
