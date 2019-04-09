@@ -2,7 +2,7 @@
 
 ### Follow the steps below to start contributing to the `front` end: ###
 1. Clone this repository.
-2. Initialize your package.json: `npm init -f`.
+2. Initialize your `package.json`: `npm init -f`.
 3. Install our dev dependencies: 
    ```
    npm install --save-dev @babel/core @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators @babel/plugin-syntax-dynamic-import @babel/preset-env @babel/preset-react @babel/polyfill "babel-loader@^8.0.0-beta" html-webpack-plugin webpack webpack-cli webpack-dev-server
@@ -12,7 +12,7 @@
    npm install --save apollo-boost graphql react react-apollo react-dom react-loadable react-router-dom
    ```
 5. If you're using c0d3's server: 
-   * Create a your own port: https://apps.c0d3.com/
+   * Create a your own port at https://apps.c0d3.com/.
    * Modify your `webpack.config.js`'s `devServer` value to:
    ```
    devServer: {
