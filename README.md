@@ -13,7 +13,7 @@
    ```
 5. If you're using c0d3's server: 
    * Create a your own port: https://apps.c0d3.com/
-   * Modify your webpack.config.js file's devServer to:
+   * Modify your `webpack.config.js`'s `devServer` value to:
    ```
    devServer: {
       historyApiFallback: true,
@@ -25,7 +25,7 @@
    ```
 6. Use the following command to run the client: `npm run dev`.
 7. If you run into issues related to files in the codebase, email Maricris for help (hello@vimgirl.com).
-
+----
 ### Follow the steps below to start contributing to the `back` end: ###
 1. Make sure you have Node, Go, and Dep already installed on your machine.
 2. Set your GOPATH: `export GOPATH={path to app directory}/server`
