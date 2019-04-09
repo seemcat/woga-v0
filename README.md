@@ -1,4 +1,4 @@
-## A mind and body balancing tool for the modern day folks. ##
+## Woga: A mind and body balancing tool for the modern day folks. ##
 
 ### Follow the steps below to start contributing to the `front` end: ###
 1. Clone this repository.
