@@ -10,6 +10,7 @@ import Meditation from './meditation'
 import MeditationForm from './meditationForm'
 import Woga from './woga'
 import Resources from './resources'
+import Admin from './admin'
 
 class AppRouter extends React.Component {
 	render() {
@@ -26,6 +27,7 @@ class AppRouter extends React.Component {
 			<Route exact path='/meditationform' component={MeditationForm} />
 			<Route exact path='/woga' component={Woga} />
 			<Route exact path='/resources' component={Resources} />
+			<Route exact path='/admin' component={Admin} />
 			<Route exact component={NotFound} />
 			</Switch>
 			</div>

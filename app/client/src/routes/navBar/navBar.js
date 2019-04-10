@@ -7,7 +7,8 @@ const NavBar = () => {
 		<div className="nb-section">
 		<Link to="/" className="nb-logo nb-text">Woga</Link>
 		<Link to="/about" className="nb-about nb-text">About</Link>
-		<Link to="/login" className="login nb-text">Login</Link>
+		<Link to="/resources" className="login nb-text">Resources</Link>
+		<Link to="/admin" className="login nb-text">Admin</Link>
 		</div>
 	)
 }
