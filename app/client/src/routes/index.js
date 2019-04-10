@@ -9,27 +9,29 @@ import WorkoutForm from './workoutForm'
 import Meditation from './meditation'
 import Woga from './woga'
 import Resources from './resources'
+import Admin from './admin'
 
 class AppRouter extends React.Component {
-	render() {
-		return (
-			<Router>
-			<div>
-			<NavBar />
-			<Switch>
-			<Route exact path='/' component={Home} />
-			<Route exact path='/about' component={About} />
-			<Route exact path='/workout' component={Workout} />
-			<Route exact path='/workoutForm' component={WorkoutForm} />
-			<Route exact path='/meditation' component={Meditation} />
-			<Route exact path='/woga' component={Woga} />
-			<Route exact path='/resources' component={Resources} />
-			<Route exact component={NotFound} />
-			</Switch>
-			</div>
-			</Router>
-		)
-	}
+  render() {
+    return (
+      <Router>
+        <div>
+          <NavBar />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/about' component={About} />
+            <Route exact path='/workout' component={Workout} />
+            <Route exact path='/workoutForm' component={WorkoutForm} />
+            <Route exact path='/meditation' component={Meditation} />
+            <Route exact path='/woga' component={Woga} />
+            <Route exact path='/resources' component={Resources} />
+            <Route exact path='/admin' component={Admin} />
+            <Route exact component={NotFound} />
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
 }
 
 export default AppRouter;
