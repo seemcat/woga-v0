@@ -2,8 +2,8 @@
 
 ### Follow the steps below to start contributing to the `front` end: ###
 1. Clone this repository.
-2. Initialize your `package.json`: `npm init -f`.
-3. Install our dev dependencies: 
+2. `cd` into the `app` folder & initialize your `package.json`: `npm init -f`.
+3. `cd` into the `client` folder & install our dev dependencies: 
    ```
    npm install --save-dev @babel/core @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators @babel/plugin-syntax-dynamic-import @babel/preset-env @babel/preset-react @babel/polyfill "babel-loader@^8.0.0-beta" html-webpack-plugin webpack webpack-cli webpack-dev-server
    ```
