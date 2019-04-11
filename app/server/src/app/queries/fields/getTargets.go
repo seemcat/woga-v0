@@ -21,23 +21,23 @@ var GetTargets = &graphql.Field {
 	Description: "Get all targets",
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		rows, err := postgres.Client.Query("SELECT id, workout_key FROM workouts")
+		rows, err := postgres.Client.Query("SELECT id, workoutKey FROM workouts")
 		if err != nil {
 			panic(err)
 		}
 		defer rows.Close()
 
 		var id int
-		var workout_key int
+		var workoutKey int
 
 		var targets []targetsStruct
 
 		for rows.Next() {
-			switch err := rows.Scan(&id, &workout_key); err {
+			switch err := rows.Scan(&id, &workoutKey); err {
 			case sql.ErrNoRows:
 				fmt.Println("No rows were returned!")
 			case nil:
-				targets = append(targets, targetsStruct{ID: id, WORKOUT_KEY: workout_key})
+				targets = append(targets, targetsStruct{ID: id, WORKOUT_KEY: workoutKey})
 				fmt.Println(targets)
 			default:
 				panic(err)
