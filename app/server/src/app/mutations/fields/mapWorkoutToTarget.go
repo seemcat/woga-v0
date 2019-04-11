@@ -28,7 +28,7 @@ var MapWorkoutToTarget = &graphql.Field {
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
 		workoutKey, _ := params.Args["workoutKey"].(int)
-		targetName, _ := params.Args["workoutKey"].(string)
+		targetName, _ := params.Args["targetName"].(string)
 
 		sqlStatement := fmt.Sprintf(`
 		INSERT INTO %q (workoutKey)
