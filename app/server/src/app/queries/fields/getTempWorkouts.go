@@ -5,7 +5,7 @@ import (
 	"github.com/graphql-go/graphql"
 
 	"database/sql"
-	_ "github.com/lib/pq"
+	"github.com/lib/pq"
 
 	"app/data"
 	types "app/types"
@@ -19,11 +19,11 @@ type tempWorkoutStruct struct {
 }
 
 var GetTempWorkouts = &graphql.Field {
-	Type:        graphql.NewList(types.tempWorkout),
+	Type:        graphql.NewList(types.TempWorkout),
 	Description: "Get all temp workouts",
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		rows, err := postgres.Client.Query("SELECT id, title, giffUrl, targets FROM tempWorkouts")
+		rows, err := postgres.Client.Query("SELECT id, title, giffUrl, targets FROM tempworkouts")
 		if err != nil {
 			panic(err)
 		}
@@ -34,15 +34,14 @@ var GetTempWorkouts = &graphql.Field {
 		var giffUrl string
 		var targets []string
 
-		var tempWorkouts []workoutStruct
+		var tempWorkouts []tempWorkoutStruct
 
 		for rows.Next() {
-			switch err := rows.Scan(&id, &title, &giffUrl, &targets); err {
+			switch err := rows.Scan(&id, &title, &giffUrl, (pq.Array)(&targets)); err {
 			case sql.ErrNoRows:
 				fmt.Println("No rows were returned!")
 			case nil:
 				tempWorkouts = append(tempWorkouts, tempWorkoutStruct{ID: id, TITLE: title, GIFF_URL: giffUrl, TARGETS: targets})
-				fmt.Println(tempWorkouts)
 			default:
 				panic(err)
 			}
@@ -53,7 +52,6 @@ var GetTempWorkouts = &graphql.Field {
 			panic(err)
 		}
 
-		return tempWorkouts, nil 
+		return tempWorkouts, nil
 	},
 }
-
