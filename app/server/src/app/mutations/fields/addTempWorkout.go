@@ -33,7 +33,6 @@ var AddTempWorkout = &graphql.Field {
 
 		title, _ := params.Args["title"].(string)
 		giffUrl, _ := params.Args["giffUrl"].(string)
-		// targets, _ := params.Args["target"].([]string)
 		var targets []string
 		for _, target := range params.Args["target"].([]interface{}) {
 			targets = append(targets, target.(string))
