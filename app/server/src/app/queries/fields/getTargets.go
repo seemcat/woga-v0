@@ -17,11 +17,11 @@ type targetsStruct struct {
 }
 
 var GetTargets = &graphql.Field {
-	Type:        graphql.NewList(types.target),
+	Type:        graphql.NewList(types.Target),
 	Description: "Get all targets",
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		rows, err := postgres.Client.Query("SELECT id, workoutKey FROM workouts")
+		rows, err := postgres.Client.Query("SELECT id, workoutKey FROM tempWorkouts")
 		if err != nil {
 			panic(err)
 		}
@@ -49,6 +49,6 @@ var GetTargets = &graphql.Field {
 			panic(err)
 		}
 
-		return targets, nil 
+		return targets, nil
 	},
 }

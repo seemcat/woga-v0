@@ -6,7 +6,7 @@ import (
 )
 
 var TempWorkout = graphql.NewObject(graphql.ObjectConfig {
-	Name: "Temp Workout",
+	Name: "Temp",
 	Fields: graphql.Fields{
 		"id": &graphql.Field{
 			Type: graphql.Int,
@@ -18,7 +18,6 @@ var TempWorkout = graphql.NewObject(graphql.ObjectConfig {
 			Type: graphql.String,
 		},
 		"targets": &graphql.Field{
-			// How to add array type?
 			Type: graphql.NewList(graphql.String),
 		},
 	},
