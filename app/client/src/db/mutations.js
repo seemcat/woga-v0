@@ -6,23 +6,23 @@ export const UPDATE_WORKOUT_FORM_TOGGLE_VALUE = gql`
   }
 `;
 
-export const ADD_WORKOUT = gql`
-  mutation AddWorkout($title: String, $target: String) {
-	      addWorkout(title: $title, target: $target) {
+export const ADD_TEMP_WORKOUT = gql`
+  mutation AddTempWorkout($title: String, $giffUrl: String, $targets: [String]) {
+	      addTempWorkout(title: $title, giffUrl: $giffUrl, targets: $targets) {
 			    id
 			    title
-			    target
+			    giffUrl
+			    targets
 			  }
 	    }
 `
 
-export const ADD_ROUTINE = gql`
-  mutation AddRoutine($workout_id: Int, $title: String, $reps: Int, $giffUrl: String) {
-	      addRoutine(workout_id: $workout_id, title: $title, reps: $reps, giffUrl: $giffUrl) {
-			    workout_id
-			    title
-			    reps
-			    giffUrl
+export const MAP_WORKOUT_TO_TARGET = gql`
+  mutation MapWorkoutToTarget($workoutKey: Int, $targetName: String) {
+	      mapWorkoutToTarget(workoutKey: $workoutKey, targetName: $targetName) {
+			    id
+			    workoutKey
+			    targetName
 			  }
 	    }
 `
