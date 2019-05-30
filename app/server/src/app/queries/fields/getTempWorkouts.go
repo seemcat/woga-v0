@@ -14,7 +14,7 @@ import (
 type tempWorkoutStruct struct {
 	ID         int
 	TITLE      string
-	GIFF_URL   string
+	GIFFURL   string
 	TARGETS    []string
 }
 
@@ -41,7 +41,7 @@ var GetTempWorkouts = &graphql.Field {
 			case sql.ErrNoRows:
 				fmt.Println("No rows were returned!")
 			case nil:
-				tempWorkouts = append(tempWorkouts, tempWorkoutStruct{ID: id, TITLE: title, GIFF_URL: giffUrl, TARGETS: targets})
+				tempWorkouts = append(tempWorkouts, tempWorkoutStruct{ID: id, TITLE: title, GIFFURL: giffUrl, TARGETS: targets})
 			default:
 				panic(err)
 			}
