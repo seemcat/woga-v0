@@ -14,5 +14,8 @@ var Target = graphql.NewObject(graphql.ObjectConfig {
 		"workoutKey": &graphql.Field{
 			Type: graphql.Int,
 		},
+		"targetName": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })

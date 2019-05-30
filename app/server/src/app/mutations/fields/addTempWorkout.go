@@ -5,6 +5,7 @@ import (
 
 	"app/data"
 	types "app/types"
+	"github.com/lib/pq"
 )
 
 type tempWorkoutStruct struct {
@@ -33,9 +34,11 @@ var AddTempWorkout = &graphql.Field {
 
 		title, _ := params.Args["title"].(string)
 		giffUrl, _ := params.Args["giffUrl"].(string)
-		var targets []string
-		for _, target := range params.Args["target"].([]interface{}) {
-			targets = append(targets, target.(string))
+		targetsInterface, _ := params.Args["targets"].([]interface{})
+
+		targets := make([]string, len(targetsInterface))
+		for i, target := range targetsInterface {
+			targets[i] = target.(string)
 		}
 
 		sqlStatement := `
@@ -45,7 +48,7 @@ var AddTempWorkout = &graphql.Field {
 
 		id := 0
 
-		var err = postgres.Client.QueryRow(sqlStatement, title, giffUrl, targets).Scan(&id)
+		var err = postgres.Client.QueryRow(sqlStatement, title, giffUrl, pq.Array(targets)).Scan(&id)
 		if err != nil {
 			panic(err)
 		}
