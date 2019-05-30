@@ -3,111 +3,112 @@ import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { graphql, compose, Mutation } from 'react-apollo';
 import { 
-  ADD_WORKOUT,
-  ADD_ROUTINE
+	ADD_TEMP_WORKOUT,
+	MAP_WORKOUT_TO_TARGET,
 } from '../../db/mutations';
 import '../workout/workout.css'
+import './workoutForm.css'
 
 @compose(
-  graphql(ADD_ROUTINE, { name: 'addRoutine' }),
-  graphql(ADD_WORKOUT, { name: 'addWorkout' })
+	graphql(MAP_WORKOUT_TO_TARGET, { name: 'mapWorkoutToTarget' }),
+	graphql(ADD_TEMP_WORKOUT, { name: 'addTempWorkout' }),
 )
 class WorkoutForm extends React.Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {
-      title: '',
-      target: '',
-      routines: [],
-    };
+		this.state = {
+			title: '',
+			giffUrl: '',
+			targets: {
+				abs: false,
+				arms: false,
+				back: false,
+				buttocks: false,
+				cardio: false,
+				chest: false,
+				hips: false,
+				legs: false,
+				shoulders: false,
+			},
+		};
 
-  }
+	}
 
-  addAnotherRoutine = (event) => {
-    let routine = {
-      title: '',
-      reps: 0,
-      giffUrl: ''
-    };
+	handleChange = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	}
 
-    this.state.routines.push(routine);
-    this.setState({ routines: this.state.routines });
-  }
 
-  removeRoutine = (event) => {
-    this.state.routines.splice(event.target.id, 1);
-    this.setState({ routines: this.state.routines });
-  }
+	toggleMuscle = ({ target: { value: muscle }}) => {
+		let res = this.state.targets[muscle] ? false : true;
+		this.setState({ targets: Object.assign({}, this.state.targets, {[muscle]: res}) });
+	}
 
-  handleChangeOnRoutine = (event) => {
-    let routineObj = this.state.routines[event.target.id];
-    routineObj[event.target.name] = event.target.value;
-    this.setState({ routines: this.state.routines });
-  }
+	handleSave = () => {
+		// Grab the selected muscles
+		const allMuscles = this.state.targets;
+		const selectedMuscles = Object.keys(allMuscles).filter(muscle => allMuscles[muscle]);
 
-  handleChange = (event) => {
-    let routineToChange = this.state.routines[event.target.key];
-    this.setState({ [event.target.name]: event.target.value });
-  }
+		// UPDATE THE TEMP WORKOUTS TABLE 
+		this.props.addTempWorkout({
+			variables: {
+				title: this.state.title,
+				giffUrl: this.state.giffUrl,
+				targets: selectedMuscles,
+			},
+		}).then(({ data }) => {
 
-  handleSubmit = () => {
-    /* UPDATE THE WORKOUTS TABLE */
-    this.props.addWorkout({
-      variables: {
-        title: this.state.title,
-        target: this.state.target,
-      },
-    }).then(({ data }) => {
+			// UPDATE ALL MUSCLE TABLES 
+			selectedMuscles.forEach((muscle) => {
+				this.props.mapWorkoutToTarget({
+					variables: {
+						workoutKey: data.addTempWorkout.id,
+						targetName: muscle,
+					},
+				}).then(({ data }) => {
+					console.log('got data from mutating muscles table: ', data);
+				}).catch((error) => {
+					console.log('there was an error mutating muscles table: ', error);
+				})
+			});
 
-      /* UPDATE THE ROUTINES TABLE */
-      this.state.routines.forEach((routine) => {
-        this.props.addRoutine({
-          variables: {
-            workout_id: data.addWorkout.id,
-            title: routine.title,
-            reps: routine.reps,
-            giffUrl: routine.giffUrl
-          },
-        }).then(({ data }) => {
-          console.log('got data from mutating routines table: ', data);
-        }).catch((error) => {
-          console.log('there was an error mutating routines table: ', error);
-        })
-      });
+		}).catch((error) => {
+			console.log('there was an error mutating workouts table: ', error);
+		});
+	}
 
-    }).catch((error) => {
-      console.log('there was an error mutating workouts table: ', error);
-    });
-  }
+	render() {
 
-  render() {
-    return (
-      <div className="woga-body">
-        <div className="woga-title">
-          <div className="woga-item">NEW WORKOUT, WHO DIS?</div>
-        </div>
-        <div className="woga-section">
-          <div className="woga-item">Title: <input type="text" value={this.state.title} name="title" onChange={this.handleChange} /></div>
-          <div className="woga-item">Target: <input type="text" value={this.state.target} name="target" onChange={this.handleChange} /></div>
+		return (
+			<div className="woga-body">
+			<div className="woga-title">
+			<div className="woga-item">NEW WORKOUT, WHO DIS?</div>
+			</div>
+			<div className="woga-section">
+			<div>
+			Title: <input type="text" value={this.state.title} name="title" onChange={this.handleChange} />
+			</div>
+			<div>
+			GiffUrl: <input type="text" value={this.state.giffUrl} name="giffUrl" onChange={this.handleChange} />
+			</div>
+			<div>
+			Target Muscles: {
+				Object.keys(this.state.targets).map((muscle, idx) => {
+					const state = this.state.targets[muscle] ? 'yes' : 'no';
+					return <button className={state} key={idx} value={muscle} onClick={this.toggleMuscle}>{muscle}</button>;
+				})
+			}
+			</div>
+			</div>
 
-          <div className="woga-item">Routines: <button onClick={this.addAnotherRoutine}>+</button></div>
-          { this.state.routines.map((routine, idx) => (
-            <div className="woga-section" key={idx}>
-              <div className="woga-item">Title: <input type="text" value={this.state.routines[idx].title} name={"title"} id={idx} onChange={this.handleChangeOnRoutine} /></div>
-              <div className="woga-item">Reps: <input type="text" value={this.state.routines[idx].reps} name={"reps"} id={idx} onChange={this.handleChangeOnRoutine} /></div>
-              <div className="woga-item">GiffUrl: <input type="text" value={this.state.routines[idx].giffUrl} name={"giffUrl"} id={idx} onChange={this.handleChangeOnRoutine} /></div>
-              <div className="woga-item"><button onClick={this.removeRoutine} id={idx}>-</button></div>
-            </div>
-          )) }
-          </div>
-          <div className="woga-section">
-            <div className="woga-item"><button onClick={this.handleSubmit}>Submit</button></div>
-            <div className="woga-item"><Link to="/workout" className="active">Cancel</Link></div>
-          </div>
-        </div> 
-    )
-  }
+			<div className="woga-section">
+			<div className="woga-item"><button onClick={this.handleSave}>Save</button></div>
+			<div className="woga-item"><Link to="/admin" className="active">Cancel</Link></div>
+			</div>
+			</div> 
+		)
+	}
 }
 
 export default WorkoutForm
