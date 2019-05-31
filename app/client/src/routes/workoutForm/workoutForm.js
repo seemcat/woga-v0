@@ -60,7 +60,7 @@ class WorkoutForm extends React.Component {
         targets: selectedMuscles
       }
     })
-      .then(({ addTempWorkout: { id: tempWorkoutId } }) => {
+      .then(({ data: { addTempWorkout: { id: tempWorkoutId } } }) => {
         // UPDATE ALL MUSCLE TABLES
         selectedMuscles.forEach(muscle => {
           mapWorkoutToTarget({
