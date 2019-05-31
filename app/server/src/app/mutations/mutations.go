@@ -12,5 +12,7 @@ var RootMutation = graphql.NewObject(graphql.ObjectConfig{
 		"addRoutine": fields.AddRoutine,
 		"addTempWorkout": fields.AddTempWorkout,
 		"mapWorkoutToTarget": fields.MapWorkoutToTarget,
+		"removeWorkout": fields.RemoveWorkout,
+		"removeMap2Workout": fields.RemoveMap2Workout,
 	},
 })
