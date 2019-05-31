@@ -9,7 +9,7 @@ import './admin.css'
 const Admin = () => (
 	<Query query={GET_TEMP_WORKOUTS}>
 	{({ loading, error, data }) => {
-		if (loading) return 'Loding...';
+		if (loading) return 'Loading...';
 		if (error) return `Error! ${error.message}`;
 
 		const workouts = data.getTempWorkouts.map((workout, idx) =>
