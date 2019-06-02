@@ -7,7 +7,7 @@ import (
 var DeletedWO = graphql.NewObject(graphql.ObjectConfig {
 	Name: "DeleteWO",
 	Fields: graphql.Fields{
-		"woId": &graphql.Field{
+		"id": &graphql.Field{
 			Type: graphql.Int,
 		},
 		"title": &graphql.Field{

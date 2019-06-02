@@ -28,7 +28,7 @@ var RemoveWorkout = &graphql.Field {
 		sqlStatement := `
 		DELETE FROM tempWorkouts
 		WHERE id = $1
-		RETURNING id, title;
+		RETURNING id, title
 		`
 
 		var id int

@@ -10,28 +10,28 @@ import (
 
 type removeMap2WorkoutStruct struct {
 	ID             int
-	WORKOUTID     int
+	WORKOUTID      int
 }
 
 var RemoveMap2Workout = &graphql.Field {
 	Type:        types.DeletedMap2WO,
 	Description: "Remove mapping of workout from muscle",
 	Args: graphql.FieldConfigArgument{
-		"workoutKey": &graphql.ArgumentConfig{
-			Type: graphql.Int,
-		},
 		"targetName": &graphql.ArgumentConfig{
 			Type: graphql.String,
+		},
+		"workoutKey": &graphql.ArgumentConfig{
+			Type: graphql.Int,
 		},
 	},
 
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-		workoutKey, _ := params.Args["workoutKey"].(int)
 		targetName, _ := params.Args["targetName"].(string)
+		workoutKey, _ := params.Args["workoutKey"].(int)
 
 		sqlStatement := fmt.Sprintf(`
-		DELETE FROM %q (workoutKey)
+		DELETE FROM %s
 		WHERE workoutKey = $1
 		RETURNING id, workoutKey
 		`, targetName)
@@ -39,8 +39,8 @@ var RemoveMap2Workout = &graphql.Field {
 		var id int
 		var workoutKeyDeleted int
 
-		// does the return value need to be the same as &?
 		var err = postgres.Client.QueryRow(sqlStatement, workoutKey).Scan(&id, &workoutKeyDeleted)
+
 		if err != nil {
 			panic(err)
 		}
