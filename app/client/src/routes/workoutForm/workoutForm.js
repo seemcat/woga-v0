@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import gql from "graphql-tag";
 import { graphql, compose, Mutation } from "react-apollo";
 import { ADD_TEMP_WORKOUT, MAP_WORKOUT_TO_TARGET } from "../../db/mutations";
 import "../workout/workout.css";
